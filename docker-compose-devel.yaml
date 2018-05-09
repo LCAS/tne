@@ -3,10 +3,8 @@ version: '2'
 services:
   redis:
     image: redis
-    restart: always
   db:
     image: mysql:5.7
-    restart: always
     volumes:
       - /srv/transnat/db:/var/lib/mysql
     expose:
@@ -24,7 +22,8 @@ services:
     ports:
       - 1443:443
     volumes:
-      - /srv/transnat/storage:/var/www/transnat/storage
+      - .:/var/www/html/transnat
+      - /srv/transnat/storage:/var/www/html/transnat/storage
       - /srv/transnat/config:/srv/config
 
   mysqldump:
@@ -38,4 +37,5 @@ services:
       MYSQL_HOST: db
       MYSQL_USER: root
       MYSQL_PASSWORD:
-      MYSQL_DATABASE: transnational
+      MYSQL_DATABASE: pgr_saml
+

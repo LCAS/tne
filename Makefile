@@ -1,5 +1,5 @@
 
-ROOT?=/srv/transnational
+ROOT?=/srv/transnat
 
 .PHONY: all git
 

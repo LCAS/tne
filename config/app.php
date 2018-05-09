@@ -10,7 +10,6 @@ return [
     | This value is the name of your application. This value is used when the
     | framework needs to place the application's name in a notification or
     | any other location as required by the application or its packages.
-    |
     */
 
     'name' => env('APP_NAME', 'Transnational System'),
@@ -52,7 +51,23 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://transnational.lcas.group'),
+    'url' => env('APP_URL', 'http://tne.lcas.group'),
+
+    'url_prefix' => env('URL_PREFIX', ''),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Route Prefix Proxy
+    |--------------------------------------------------------------------------
+    |
+    | This URL is used to set the applications root URL when using a global
+    | route prefix. They will then be used by the RoutePrefixProxy.
+    |
+    */
+
+    'proxy_url' => env('PROXY_URL'),
+
+    'proxy_schema' => env('PROXY_SCHEMA'),
 
     /*
     |--------------------------------------------------------------------------
