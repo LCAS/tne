@@ -139,7 +139,7 @@
             }
         },
         created() {
-            axios.get('/countries')
+            axios.get(window.tne_base_path + '/countries')
                 .then((response) => {
                     this.countries = response.data;
                     this.country_loading = false;
@@ -159,7 +159,7 @@
                 this.modules = [];
                 if (val != "") {
                     this.programme_loading = true;
-                    axios.get('/programmes/' + val)
+                    axios.get(window.tne_base_path + '/programmes/' + val)
                         .then((response) => {
                             this.programmes = response.data;
                             this.programme_loading = false;
@@ -171,7 +171,7 @@
                 this.modules = [];
                 if (val != "") {
                     this.module_loading = true;
-                    axios.get('/modules/' + val)
+                    axios.get(window.tne_base_path + '/modules/' + val)
                         .then((response) => {
                             this.modules = response.data;
                             this.module_loading = false;
@@ -183,7 +183,7 @@
                 this.criterias = [];
                 if (val != "") {
                     this.criteria_loading = true;
-                    axios.get('/criterias/' + val)
+                    axios.get(window.tne_base_path + '/criterias/' + val)
                         .then((response) => {
                             this.criterias = response.data;
                             this.criteria_loading = false;
