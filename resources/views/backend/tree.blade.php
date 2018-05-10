@@ -7,13 +7,13 @@
     </a>
   </div>
     @foreach(App\Country::get() as $cr)
-        <collapse-box rawr="{{ $cr->name }}" icon="Co" :count="{{ $cr->programmes_count }}">
+        <collapse-box title="{{ $cr->name }}" icon="Co" :count="{{ $cr->programmes_count }}">
             @foreach($cr->programmes as $p)
-                <collapse-box rawr="{{ $p->name }}" icon="Pr" :count="{{ $p->modules_count }}">
+                <collapse-box title="{{ $p->name }}" icon="Pr" :count="{{ $p->modules_count }}">
                     @foreach($p->modules as $m)
-                        <collapse-box rawr="{{ $m->name }}" icon="Mo" :count="{{ $m->criterias_count }}">
+                        <collapse-box title="{{ $m->name }}" icon="Mo" :count="{{ $m->criterias_count }}">
                             @foreach($m->criterias()->with('links')->get() as $c)
-                                <collapse-box rawr="{{ $c->description }}" icon="Cr" :count="{{ $c->links()->count() }}">
+                                <collapse-box title="{{ $c->description }}" icon="Cr" :count="{{ $c->links()->count() }}">
                                     @if($c->links->isNotEmpty()) Linked Criteria:
                                     @else
                                     No Connected Links

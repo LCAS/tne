@@ -6,6 +6,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.withCredentials = true;
 
 let token = document.head.querySelector('meta[name="csrf-token"]');
+window.tne_base_path = document.head.querySelector('meta[name="tne_base_path"]').content;
 
 window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 
@@ -67,7 +68,7 @@ const app = new Vue({
             this.table_data = {'selected': [], 'linked': [] };
             if (val != "") {
                 this.table_loading = true;
-                axios.get('/table-data/' + val)
+                axios.get(window.tne_base_path + '/table-data/' + val)
                 .then((response) => {
                     this.table_data = response.data;
                     this.hideNoLinks = true;

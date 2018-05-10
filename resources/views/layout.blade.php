@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.0.6/dist/vue-multiselect.min.css">
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="tne_base_path" content="{{ route('home') }}">
         <title>Transnational Programmes</title>
     </head>
     <body>

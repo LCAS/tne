@@ -3,7 +3,7 @@
     <transition name="fade">
   <div class="card">
     <header @click="togglelinks" class="card-header">
-      <p class="card-header-title">{{ this.rawr }} - [{{ this.count }}]</p>
+      <p class="card-header-title">{{ this.title }} - [{{ this.count }}]</p>
     <span class="card-header-icon"><span class="icon">[{{ this.icon || "" }}]</span></span>
     </header>
     <div v-show="collapsed" class="card-content">
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-    props: ['rawr', 'icon', 'count'],
+    props: ['title', 'icon', 'count'],
     data() {
         return {
             collapsed: true
