@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.0.6/dist/vue-multiselect.min.css">
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <link rel="stylesheet" href="{{ url(config('app.url_prefix') . mix('css/app.css')) }}">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="tne_base_path" content="{{ route('home') }}">
         <title>Transnational Programmes</title>
@@ -71,6 +71,6 @@
                 </div>
             </div>
         </footer>
-        <script src="{{ mix('js/app.js') }}"></script>
+	<script src="{{ url(config('app.url_prefix') . mix('js/app.js')) }}"></script>
     </body>
 </html>
