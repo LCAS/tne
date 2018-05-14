@@ -24,7 +24,7 @@ services:
     ports:
       - 8080:443
     volumes:
-      - /srv/transnat/storage:/var/www/transnat/storage
+      - /srv/transnat/storage:/var/www/html/transnat/storage
       - /srv/transnat/config:/srv/config
 
   mysqldump:
