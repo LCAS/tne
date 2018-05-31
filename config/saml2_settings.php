@@ -1,6 +1,7 @@
 <?php
 
 $idp_host = 'https://adfs.lincoln.ac.uk:443';
+$prefix = str_finish(env('URL_PREFIX', ''), '/');
 
 return $settings = [
 
@@ -17,7 +18,7 @@ return $settings = [
      */
     'useRoutes' => true,
 
-    'routesPrefix' => '/saml2',
+    'routesPrefix' => $prefix.'saml2',
 
     /*
      * which middleware group to use for the saml routes
@@ -34,17 +35,17 @@ return $settings = [
     /*
      * Where to redirect after logout
      */
-    'logoutRoute' => '/',
+    'logoutRoute' => $prefix,
 
     /*
      * Where to redirect after login if no other option was provided
      */
-    'loginRoute' => '/',
+    'loginRoute' => $prefix,
 
     /*
      * Where to redirect after login if no other option was provided
      */
-    'errorRoute' => '/error',
+    'errorRoute' => $prefix.'/error',
 
     /*****
      * One Login Settings
@@ -57,13 +58,7 @@ return $settings = [
     'strict' => false, //@todo: make this depend on laravel config
 
     // Enable debug mode (to print errors)
-    'debug' => true, //@todo: make this depend on laravel config,
-
-    // If 'proxyVars' is True, then the Saml lib will trust proxy headers
-    // e.g X-Forwarded-Proto / HTTP_X_FORWARDED_PROTO. This is useful if
-    // your application is running behind a load balancer which terminates
-    // SSL.
-    'proxyVars' => false,
+    'debug' => true, //@todo: make this depend on laravel config
 
     // Service Provider Data that we are deploying
     'sp' => [
@@ -71,13 +66,13 @@ return $settings = [
         // Specifies constraints on the name identifier to be used to
         // represent the requested subject.
         // Take a look on lib/Saml2/Constants.php to see the NameIdFormat supported
-        // 'NameIDFormat' => 'urn:oasis:names:tc:SAML:2.0:nameid-format:persistent',
+        //'NameIDFormat' => 'urn:oasis:names:tc:SAML:2.0:nameid-format:persistent',
 
         'NameIDFormat' => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
 
         // Usually x509cert and privateKey of the SP are provided by files placed at
         // the certs folder. But we can also provide them with the following parameters
-        'x509cert'   => '',
+        'x509cert' => '',
         'privateKey' => '',
 
         // Identifier (URI) of the SP entity.
@@ -94,7 +89,6 @@ return $settings = [
         ],
         // Specifies info about where and how the <Logout Response> message MUST be
         // returned to the requester, in this case our SP.
-        // Remove this part to not include any URL Location in the metadata.
         'singleLogoutService' => [
             // URL Location where the <Response> from the IdP will be returned,
             // using HTTP-Redirect binding.
@@ -123,6 +117,7 @@ return $settings = [
             'url' => $idp_host.'/adfs/ls?wa=wsignout1.0',
         ],
         // Public x509 certificate of the IdP
+
         'x509cert' => 'MIIC4DCCAcigAwIBAgIQfZ4RS/LKyJ5Ax128/65MDDANBgkqhkiG9w0BAQsFADAsMSowKAYDVQQDEyFBREZTIFNpZ25pbmcgLSBhZGZzLmxpbmNvbG4uYWMudWswHhcNMTcwNDEyMDI0MDUzWhcNMjAwNDExMDI0MDUzWjAsMSowKAYDVQQDEyFBREZTIFNpZ25pbmcgLSBhZGZzLmxpbmNvbG4uYWMudWswggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCkGih3kEXpFJ8aey1SBdB9TEJ5KbPaBuZ4JzD/zbY2g42wMPnmlchawouzHwCJynG8zGFt20xnuhsCdTE4Tqt9YGnWoIF9VU93KOT7AfTBkubUvWlgXBdpp07Q892RIojrykxz9T88dd2KY3kBuy7+tKWNkXQl5W6dPI4gTE3mk0EPTO68wlunEUbEsDNc7r6fLkNlIitR4blwdWeHVYoBBihHnDZlT2yv/EcKNTcHjN8c6PSIvi6dhjsPDfhBQdAYSX5jO75aEXhJ4+zUg8u7Pbwb9eTNMQ0mty28+iEcnAq6T5ppYYUnKNUgjZT2JTb6F6RxTV1LgxOa2GVB5MnPAgMBAAEwDQYJKoZIhvcNAQELBQADggEBADs4fx9fdoDO20iAHvAwYrvRaIhd65g3c4W1jQwCeA2/+DYBvfOO9t9VhzmQlUvA+X0x1rqh9GoamGfOVAzOg3ikQbOlCxRXitYNQHwCQAZ8PjVCOpQKeWbzo2bO2MwQUYdXOTrSGhc83fZEovT4kpmKC3RiOvVCTe1geqpHAoAFHa/ZDKSw8uG1zv+X4M7vWsOJJ5tx/l716f1YYqEUtsfLlDKue+OWtdiyKGO/JzYypEh7xQBdXc+GKaUd1bwpsl01f8ZMIKF4340V10FCNyr/9CH7KQBYKDRZ788imJbMuc8BKh6pkun/ETGPDr25/uMEXNSL6H4Jemfq0nChC+M=',
         /*
          *  Instead of use the whole x509cert you can use a fingerprint
@@ -190,21 +185,21 @@ return $settings = [
     // Contact information template, it is recommended to suply a technical and support contacts
     'contactPerson' => [
         'technical' => [
-            'givenName'    => 'name',
-            'emailAddress' => 'pet1330@gmail.com',
+            'givenName' => 'name',
+            'emailAddress' => env('TECH_SUPPORT_ADDRESS'),
         ],
         'support' => [
-            'givenName'    => 'Support',
-            'emailAddress' => 'pet1330@gmail.com',
+            'givenName' => 'Support',
+            'emailAddress' => env('TECH_SUPPORT_ADDRESS'),
         ],
     ],
 
     // Organization information template, the info in en_US lang is recomended, add more if required
     'organization' => [
         'en-GB' => [
-            'name'        => 'Name',
+            'name' => 'Name',
             'displayname' => 'Transnational Programmes',
-            'url'         => 'https://transnational.lcas.group',
+            'url' => env('APP_URL'),
         ],
     ],
 

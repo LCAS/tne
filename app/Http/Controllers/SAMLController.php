@@ -6,15 +6,14 @@ class SAMLController extends Controller
 {
     public function login()
     {
-        return auth()->guest() ? redirect('saml2/login') : redirect()->intended('/');
+        return auth()->guest() ? redirect()->route('saml_login') : redirect()->intended();
     }
 
     public function logout()
     {
-        return redirect()->route('saml_logout', [
-            'returnTo'    => config('saml2_settings.logoutRoute'),
-            'nameId'      => session()->get('nameId'),
-            'sessionIndex'=> session()->get('sessionIndex'),
-        ]);
+        auth()->logout();
+        session()->save();
+
+        return redirect()->route('saml_logout');
     }
 }
